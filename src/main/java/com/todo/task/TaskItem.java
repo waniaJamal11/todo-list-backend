@@ -1,13 +1,13 @@
 package com.todo.task;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "task_item") // Maps to a table named "tasks"
 public class TaskItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull (message = "Title is required")
@@ -38,6 +38,9 @@ public class TaskItem {
     public void setDone(boolean done) {
         this.done = done;
     }
+    public TaskItem() {
+    }
+
 
     public TaskItem(String title){
         this.title=title;
