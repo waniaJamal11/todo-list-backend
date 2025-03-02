@@ -10,7 +10,7 @@ public class TaskItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull (message = "Title is required")
+    @NotNull(message = "Title is required")
     private String title;
 
     private boolean done;
@@ -38,12 +38,13 @@ public class TaskItem {
     public void setDone(boolean done) {
         this.done = done;
     }
+
     public TaskItem() {
     }
 
 
-    public TaskItem(String title){
-        this.title=title;
-        this.done=false;
+    public TaskItem(String title) {
+        this.title = title;
+        this.done = false;
     }
 }

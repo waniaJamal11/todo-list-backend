@@ -16,39 +16,42 @@ public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
-//fetch data
+
+    //fetch data
     @GetMapping
-    public List<TaskItem> getTasks(){
+    public List<TaskItem> getTasks() {
         return taskRepository.findAll();
     }
-//add data
+
+    //add data
     @PostMapping("/add")
-    public TaskItem addTask (@Valid @RequestBody TaskItem taskItem){
+    public TaskItem addTask(@Valid @RequestBody TaskItem taskItem) {
         return taskRepository.save(taskItem);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateTask  (@PathVariable long id){
+    public ResponseEntity<String> updateTask(@PathVariable long id) {
         boolean exist = taskRepository.existsById(id);
-        if(exist){
-            TaskItem task =taskRepository.getById(id);
-            boolean done =task.isDone();
+        if (exist) {
+            TaskItem task = taskRepository.getById(id);
+            boolean done = task.isDone();
             task.setDone(!done);
             taskRepository.save(task);
-            return new ResponseEntity<>("Task is updated",HttpStatus.OK);
+            return new ResponseEntity<>("Task is updated", HttpStatus.OK);
 
         }
-        return new ResponseEntity<>( "Task not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Task not exist", HttpStatus.BAD_REQUEST);
 
     }
-@DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deleteTask(@PathVariable long id){
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable long id) {
         boolean exist = taskRepository.existsById(id);
-        if(exist){
+        if (exist) {
             taskRepository.deleteById(id);
-            return new ResponseEntity<>("Task is deleted",HttpStatus.OK);
+            return new ResponseEntity<>("Task is deleted", HttpStatus.OK);
 
         }
-    return new ResponseEntity<>( "Task not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Task not exist", HttpStatus.BAD_REQUEST);
     }
 }
