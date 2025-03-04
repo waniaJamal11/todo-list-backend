@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "task_item") // Maps to a table named "tasks"
+@Table(name = "task_item")
 public class TaskItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
